@@ -81,9 +81,9 @@ In your `configuration.nix`, import NiDE and enable it:
 let
   nide = pkgs.fetchFromGitHub {
     owner = "jluttine";
-    repo = "nide";
-    rev = "some tag or commit";
-    sha256 = "its sha256 hash";
+    repo = "NiDE";
+    rev = "0.1.0";
+    sha256 = "139l66hh8f86iwmq5wm4v1a342v2i06dfz5m69ja65q4a74yxvp7";
   };
 in {
   imports = [
