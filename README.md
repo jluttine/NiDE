@@ -79,10 +79,8 @@ In your `configuration.nix`, import NiDE and enable it:
 ```
 { pkgs, ...}:
 let
-  nide = pkgs.fetchFromGitHub {
-    owner = "jluttine";
-    repo = "NiDE";
-    rev = "0.1.0";
+  nide = builtins.fetchTarball {
+    url = "https://github.com/jluttine/NiDE/archive/0.1.0.tar.gz";
     sha256 = "139l66hh8f86iwmq5wm4v1a342v2i06dfz5m69ja65q4a74yxvp7";
   };
 in {
@@ -99,8 +97,8 @@ in {
 }
 ```
 
-Just choose the revision (tag or commit) you want and remember to put the
-correct hash.
+Just choose the version you want and remember to put the correct hash. Of
+course, you can also use your local check-out of the repository.
 
 ## Usage
 
