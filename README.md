@@ -37,33 +37,33 @@ options. The software package should preferably:
 The following non-exhaustive list mentions some of the awesome software packages
 used to form NiDE:
 
-- [i3](https://i3wm.org/) for window management.
-- [Polybar](https://polybar.github.io/) as the status bar.
-- [Rofi](https://github.com/davatorium/rofi) as a generic menu and launcher.
+- [i3](https://i3wm.org/) for window management
+- [Polybar](https://polybar.github.io/) as the status bar
+- [Rofi](https://github.com/davatorium/rofi) as a generic menu and launcher
 - [Pulseaudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) for sound
-  management.
+  management
 - [NetworkManager](https://wiki.gnome.org/Projects/NetworkManager) for network
-  connection management.
+  connection management
 - [GNOME Keyring](https://wiki.gnome.org/Projects/GnomeKeyring/) for storing
-  passwords and passphrases.
-- [Simple Terminal (st)](https://st.suckless.org/) as the default terminal.
+  passwords and passphrases
+- [Simple Terminal (st)](https://st.suckless.org/) as the default terminal
 - [Simple X Image Viewer (sxiv)](https://github.com/muennich/sxiv) as the
-  default image viewer.
+  default image viewer
 - [Luakit](https://luakit.github.io/) as the default browser with vim-like
-  keybindings and minimal visual garbage.
+  keybindings and minimal visual garbage
 - [udiskie](https://github.com/coldfix/udiskie) for automounting removable
-  media.
+  media
 - [kbdd](https://github.com/qnikst/kbdd) for managing keyboard layouts per
-  window.
+  window
 - [light](https://haikarainen.github.io/light/) for controlling the screen
-  backlight.
+  backlight
 - [actkbd](https://github.com/thkala/actkbd) for keybindings that work also in
-  virtual terminals.
+  virtual terminals
 - [physlock](https://github.com/muennich/physlock) as a lock screen that works
-  also in virtual terminals.
+  also in virtual terminals
 - [autorandr](https://github.com/phillipberndt/autorandr) for managing monitor
-  configurations automatically.
-- .. and many other amazing open-source software packages.
+  configurations automatically
+- .. and many other amazing open-source software packages
 
 Some small possibly interesting details:
 
@@ -144,5 +144,3 @@ NixOS and all the packages that are used by NiDE have their own licenses.*
 Copyright (C) 2019 Jaakko Luttinen
 
 NiDE is licensed under the MIT License.
-
-## About the name
