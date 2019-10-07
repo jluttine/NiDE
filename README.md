@@ -46,6 +46,9 @@ used to form NiDE:
   connection management
 - [GNOME Keyring](https://wiki.gnome.org/Projects/GnomeKeyring/) for storing
   passwords and passphrases
+- [Dunst](https://dunst-project.org/) for showing desktop notifications
+- [Dex](https://github.com/jceb/dex) for autostarting desktop applications when
+  logging in
 - [Simple Terminal (st)](https://st.suckless.org/) as the default terminal
 - [Simple X Image Viewer (sxiv)](https://github.com/muennich/sxiv) as the
   default image viewer
