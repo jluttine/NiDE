@@ -64,6 +64,33 @@ let
   # matter if you suspend while in VT without logged in user.
   #
 
+  rofi-power-menu = pkgs.stdenv.mkDerivation rec {
+    pname = "rofi-power-menu";
+    version = "1.0.1";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "jluttine";
+      repo = pname;
+      rev = version;
+      sha256 = "0hrbba3hc37qf2pjwz3rnrvcv6sn9da4faa59a2jam9cdg5d3nrl";
+    };
+
+    doCheck = false;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm755 ./rofi-power-menu $out/bin/rofi-power-menu
+    '';
+
+    meta = with lib; {
+      description = "Power-menu mode for Rofi";
+      homepage = "https://github.com/jluttine/rofi-power-menu";
+      license = licenses.mit;
+      platforms = platforms.linux;
+      maintainers = with maintainers; [ jluttine ];
+    };
+  };
+
 in {
 
   options = with lib; {
@@ -329,21 +356,7 @@ in {
       # bindsym --release Ctrl+Mod1+l exec ${xset} s activate
 
       # Menu for log out, shut down, suspend etc
-      bindsym Ctrl+Mod1+Delete mode "$mode_system"
-      set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-      mode "$mode_system" {
-          bindsym --release l exec --no-startup-id ${xset} s activate,        mode "default"
-          bindsym --release e exec --no-startup-id i3-msg exit,               mode "default"
-          bindsym --release u exec --no-startup-id dm-tool switch-to-greeter, mode "default"
-          bindsym --release s exec --no-startup-id systemctl suspend,         mode "default"
-          bindsym --release h exec --no-startup-id systemctl hibernate,       mode "default"
-          bindsym --release r exec --no-startup-id systemctl reboot,          mode "default"
-          bindsym --release Shift+s exec --no-startup-id systemctl poweroff,  mode "default"
-
-          # Exit system mode: "Enter" or "Escape"
-          bindsym Return mode "default"
-          bindsym Escape mode "default"
-      }
+      bindsym Ctrl+Mod1+Delete exec rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy
     '';
 
   };
