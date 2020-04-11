@@ -35,6 +35,9 @@ in {
       # Simple image viewer
       sxiv
 
+      # Simple PDF viewer
+      mupdf
+
       # Simple tabless web browser options
       vimb
       surf
