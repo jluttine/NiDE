@@ -38,6 +38,9 @@ in {
       # Simple PDF viewer
       mupdf
 
+      # CLI trash management
+      trash-cli
+
       # Simple tabless web browser options
       vimb
       surf
