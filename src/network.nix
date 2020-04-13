@@ -57,7 +57,7 @@ in {
     # manager or manually choosing the WLAN, connects successfully. Anyway,
     # switching to iwd backend fixes the issue. See:
     # https://github.com/NixOS/nixpkgs/issues/69368
-    networking.networkmanager.wifi.backend = "iwd";
+    #networking.networkmanager.wifi.backend = "iwd";
 
     systemd.user.services.nm-applet = {
       description = "Network manager applet";
