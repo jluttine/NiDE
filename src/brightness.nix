@@ -6,9 +6,16 @@ let
 
 in {
 
-  options = {};
+  options = with lib; {
+    services.xserver.desktopManager.nide.brightness = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+      };
+    };
+  };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && cfg.brightness.enable) {
 
     # Keybindings for adjusting monitor brightness. Adjusting brightness with
     # actkbd+light is nice because it's independent of X and works in ttys.
@@ -37,7 +44,6 @@ in {
     # reboot.)
     programs.light.enable = true;
     hardware.acpilight.enable = true;
-    hardware.brightnessctl.enable = true;
 
   };
 
