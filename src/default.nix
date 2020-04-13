@@ -70,7 +70,6 @@ in {
     services.xserver.desktopManager.session = lib.singleton {
       manage = "desktop";
       name = "nide";
-      bgSupport = false; # WHAT IS THIS???
       start = ''
         ${pkgs.i3}/bin/i3 &
         waitPID=$!
@@ -79,6 +78,8 @@ in {
         do
           echo "Waiting for i3 socket.."
         done
+
+        ${pkgs.xorg.xsetroot}/bin/xsetroot -solid black
 
         systemctl --user start nide.target
         ${pkgs.dex}/bin/dex -a
