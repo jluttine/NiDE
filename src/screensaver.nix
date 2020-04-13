@@ -66,13 +66,13 @@ let
 
   rofi-power-menu = pkgs.stdenv.mkDerivation rec {
     pname = "rofi-power-menu";
-    version = "1.0.1";
+    version = "2.0.2";
 
     src = pkgs.fetchFromGitHub {
       owner = "jluttine";
       repo = pname;
       rev = version;
-      sha256 = "0hrbba3hc37qf2pjwz3rnrvcv6sn9da4faa59a2jam9cdg5d3nrl";
+      sha256 = "10dj5zr32d1mrg57pxbl884d2z8ndmxk05n2a3f6gxcv1rd4ci90";
     };
 
     doCheck = false;
