@@ -12,12 +12,23 @@ let
   configPath = "/etc/xdg/polybar/config";
   polybarConfigFile = pkgs.writeTextFile {
     name = "polybar-config";
-    text = lib.generators.toINI {} cfg.polybar.config;
+    text = lib.generators.toINI {} cfg.bar.settings;
     destination = configPath;
   };
 
+  restartPolybar = pkgs.writeTextFile {
+    name = "restart-polybar";
+    destination = "/etc/xdg/autorandr/postswitch.d/restart-polybar";
+    text = ''
+      #!/bin/sh
+      ${pkgs.systemd}/bin/systemctl --user restart polybar
+    '';
+    executable = true;
+  };
+
   polybar-kdeconnect = let
-    deps = lib.makeBinPath [ pkgs.qt5.qttools pkgs.coreutils pkgs.gawk pkgs.rofi ];
+    deps = lib.makeBinPath [ pkgs.qt5.qttools pkgs.coreutils pkgs.gawk pkgs.rofi
+                             pkgs.gnome3.zenity pkgs.kdeconnect ];
   in pkgs.stdenv.mkDerivation rec {
     pname = "polybar-kdeconnect";
     version = "unstable-2019-05-28";
@@ -85,8 +96,14 @@ let
 in {
 
   options = with lib; {
-    services.xserver.desktopManager.nide = {
-      polybar.config = mkOption {
+    services.xserver.desktopManager.nide.bar = {
+
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+      };
+
+      settings = mkOption {
         type = types.attrsOf (types.attrsOf types.str);
         default = {
 
@@ -105,6 +122,7 @@ in {
           };
 
           "bar/nide" = {
+            monitor = "\${env:MONITOR:}";
             width = "100%";
             height = "27";
             fixed-center = "true";
@@ -117,8 +135,13 @@ in {
             module-margin-right = "2";
             modules-left = "i3 title";
             modules-center = "date";
-            modules-right = "xkeyboard pulseaudio battery kdeconnect";
-            font-0 = "fixed:pixelsize=10;1";
+            modules-right = "xkeyboard pulseaudio battery";
+            # kdeconnect module broken:
+            # https://github.com/HackeSta/polybar-kdeconnect/issues/14
+            #
+            # modules-right = "xkeyboard pulseaudio battery kdeconnect";
+            font-0 = "JetBrains Mono:pixelsize=8;1";
+            #font-0 = "fixed:pixelsize=10;1";
             font-1 = "unifont:fontformat=truetype:size=8:antialias=false;0";
             #font-2 = "Wuncon Siji:pixelsize=10;1";
             font-2 = "Siji:pixelsize=10;0";
@@ -252,7 +275,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
 
     # Perhaps, instead of downloading the huge nerdfonts package with all the
     # fonts, just package the ones that are needed. See an example here:
@@ -291,13 +314,31 @@ in {
       )
     ];
 
+    # TODO: Polybar could search for configs from XDG_CONFIG_HOME and
+    # XDG_CONFIG_DIRS and use the first one that contains the named bar?
     systemd.user.services.polybar = {
       description = "Polybar daemon";
       wantedBy = [ "nide.target" ];
       partOf = [ "nide.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.polybar}/bin/polybar --reload --config=/run/current-system/sw${configPath} nide";
+        Type = "forking";
+        # NOTE: There's --reload flag available to automatically reload polybar
+        # when the configuration file is modified. However, it doesn't work when
+        # the file isn't modified but rather the file in the given path is
+        # changed. That is, the file a symlink is pointing to is changed.
+        #ExecStart = "${pkgs.polybar}/bin/polybar --config=/run/current-system/sw${configPath} nide";
       };
+      script = let
+        polybar = "${pkgs.polybar}/bin/polybar";
+        xrandr = "${pkgs.xorg.xrandr}/bin/xrandr";
+        grep = "${pkgs.gnugrep}/bin/grep";
+      in lib.mkDefault ''
+        for m in $(${polybar} --list-monitors | cut -d":" -f1); do
+          if [ -z "$(${xrandr} | grep $m | grep disconnected)" ]; then
+            MONITOR=$m ${polybar} --config=/run/current-system/sw${configPath} nide &
+          fi
+        done
+      '';
     };
 
     services.xserver.desktopManager.nide.i3Config = let
@@ -306,11 +347,14 @@ in {
       bindsym $mod+Shift+BackSpace exec ${polybar-msg} cmd toggle
       bindsym $mod+BackSpace border toggle
     '';
-      #bindsym $mod+BackSpace [class="^.*"] border toggle
     environment.systemPackages = with pkgs; [
       polybar
       polybarConfigFile
-    ];
+    ] ++ (
+      # If autorandr is enabled, add a postswitch hook that restarts Polybar
+      # when monitor configuration is changed.
+      lib.optional config.services.autorandr.enable restartPolybar
+    );
 
   };
 
