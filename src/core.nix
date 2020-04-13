@@ -21,7 +21,7 @@ in {
     services.xserver.desktopManager.nide.i3Config = ''
       set $mod Mod4
 
-      bindsym $mod+space exec ${pkgs.rofi}/bin/rofi -show drun -modi drun#run -matching fuzzy -show-icons
+      bindsym $mod+space exec ${pkgs.rofi}/bin/rofi -show drun -modi drun#run -matching fuzzy -show-icons -sidebar-mode
 
       floating_modifier $mod
 
