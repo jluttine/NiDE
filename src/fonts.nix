@@ -15,39 +15,34 @@ in {
 
   config = lib.mkIf cfg.enable {
 
-    # Add DejaVu font
+    # Add DejaVu font and same fonts as Plasma
     fonts.fonts = with pkgs; [
+      jetbrains-mono
       dejavu_fonts
+      noto-fonts
+      hack-font
     ];
+
+    # In order to set the default font for Simple Terminal, one has to patch
+    # this line: https://git.suckless.org/st/file/config.def.h.html#l8
+    #
+    # Or, alternatively, wrap st so that it is always called with -f flag. But
+    # then one cannot call st with another font flag.. Wait, yes they can! The
+    # last -f flag is used so one can override the previous options. Nice.
+
+    # These are the same fonts as Plasma uses
+    fonts.fontconfig.defaultFonts = {
+      monospace = [ "JetBrains Mono" ]; #"Hack" "Noto Mono" ];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
+    };
 
     # There also is the (new) i3-dmenu-desktop which only displays applications
     # shipping a .desktop file. It is a wrapper around dmenu, so you need that
     # installed.
     services.xserver.desktopManager.nide.i3Config = ''
-      set $mod Mod4
-
-      font pango:DejaVu Sans Mono 8
-
-      bindsym $mod+space exec ${pkgs.dmenu}/bin/dmenu_run
-
-      floating_modifier $mod
-
-      bindsym $mod+Shift+c reload
-      bindsym $mod+Shift+r restart
-
-      bar {
-              status_command i3status
-      }
+      font pango:JetBrains Mono 8
     '';
-
-    #programs.nm-applet.enable = true;
-
-    # Other core apps for making a complete desktop environment experience.
-    environment.systemPackages = with pkgs; [
-      dmenu #application launcher most people use
-      i3status # gives you the default i3 status bar
-      #networkmanagerapplet
-    ];
 
   };
 

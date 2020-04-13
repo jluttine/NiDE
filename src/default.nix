@@ -25,6 +25,7 @@ in {
   #imports = lib.optionals cfg.enable [
   imports = [
     ./core.nix
+    ./fonts.nix
     ./windows.nix
     ./workspaces.nix
     ./notifications.nix
