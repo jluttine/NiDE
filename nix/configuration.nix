@@ -49,6 +49,7 @@
   programs.light.enable = true;
   hardware.acpilight.enable = true;
 
-  environment.systemPackages = import ./packages.nix { inherit pkgs; };
+  # NOTE: The packages aren't included in this configuration file. Use
+  # packages.nix explicitly for that. See README for more information.
 
 }
