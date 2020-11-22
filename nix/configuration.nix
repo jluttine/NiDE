@@ -13,6 +13,7 @@ in {
   options = {
     services.xserver.desktopManager.nide = {
       enable = lib.mkEnableOption "Niche i3 Desktop Environment";
+      installPackages = lib.mkEnableOption "NiDE system-wide packages";
     };
   };
 
@@ -59,8 +60,11 @@ in {
     programs.light.enable = true;
     hardware.acpilight.enable = true;
 
-    # NOTE: The packages aren't included in this configuration file. Use
-    # packages.nix explicitly for that. See README for more information.
+    # Installing the NiDE dependencies is optional as they can be installed also
+    # by the user. See README for more information.
+    environment.systemPackages = lib.optionals cfg.installPackages (
+      (import ./packages.nix) { inherit pkgs; }
+    );
   };
 
 }

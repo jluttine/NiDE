@@ -149,13 +149,13 @@ in {
   ];
   config = {
     ...
-    services.xserver.desktopManager.nide.enable = true;
+    services.xserver.desktopManager.nide = {
+      enable = true;
+      installPackages = true;
+    };
     nix.extraOptions = ''
       tarball-ttl = 0
     '';
-    environment.systemPackages = [
-      ...
-    ] ++ ((import "${nide}/nix/packages.nix") { inherit pkgs; });
   };
 }
 ```
@@ -175,12 +175,11 @@ That isn't done here because it's difficult to maintain in this README file. Of
 course, you can also use your local check-out of the repository and import from
 that path instead of GitHub.
 
-Note that it is possible to only either import `configuration.nix` but not use
-`packages.nix` or vice versa depending on what you want. Personally, I import
-`configuration.nix` to get enable configurations that cannot be done by the user
-in the home directory, but I don't add `packages.nix` to `systemPackages`
-because I want to maintain those packages in the home directory as described in
-the previous section.
+Note that it is not mandatory to install the packages system wide: set
+`installPackages = false;` to disable. Personally, I import `configuration.nix`
+to enable configurations that cannot be done by the user in the home directory,
+but I disable `installPackages` because I want to maintain those packages in the
+home directory as described in the previous section.
 
 ### Ubuntu and others
 
