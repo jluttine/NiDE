@@ -116,7 +116,7 @@ There are two ways to install the dependencies on NixOS as described below:
 
 #### Home-directory installation of dependencies
 
-In the root of NiDE repository, run:
+In `~/.nide` directory, run:
 
 ```
 nix-build
@@ -136,39 +136,17 @@ to be aware of.
 
 #### System-wide installation of dependencies
 
-In your `configuration.nix`, import NiDE and enable it:
+In your `configuration.nix`, import NiDE configuration and add the packages:
 
 ```
 { pkgs, ...}:
 let
-  nide = builtins.fetchTarball {
-    url = "https://github.com/jluttine/NiDE/archive/master.tar.gz";
-    sha256 = null;
-  };
+  nide = builtins.fetchTarball "https://github.com/jluttine/NiDE/archive/master.tar.gz";
 in {
   imports = [
     ...
     "${nide}/nix/configuration.nix"
   ];
-}
-```
-
-It's recommended to pin the tarball to a specific commit or tag and then set
-`sha256`. However, that isn't done here because it's difficult to maintain in
-this README file. Of course, you can also use your local check-out of the
-repository and import from that path instead of GitHub.
-
-Alternatively, you can install only the packages but not set the other
-configuration options:
-
-```
-{ pkgs, ...}:
-let
-  nide = builtins.fetchTarball {
-    url = "https://github.com/jluttine/NiDE/archive/master.tar.gz";
-    sha256 = null;
-  };
-in {
   config = {
     ...
     environment.systemPackages = [
@@ -177,6 +155,27 @@ in {
   };
 }
 ```
+
+It's recommended to pin the tarball to a specific commit or tag and then set
+`sha256`:
+
+```
+nide = builtins.fetchTarball {
+  url = "https://github.com/jluttine/NiDE/archive/SOME_REV_HERE.tar.gz";
+  sha256 = "SHA256 HASH HERE";
+};
+```
+
+However, that isn't done here because it's difficult to maintain in this README
+file. Of course, you can also use your local check-out of the repository and
+import from that path instead of GitHub.
+
+Note that it is possible to only either import `configuration.nix` but not use
+`packages.nix` or vice versa depending on what you want. Personally, I import
+`configuration.nix` to get enable configurations that cannot be done by the user
+in the home directory, but I don't add `packages.nix` to `systemPackages`
+because I want to maintain those packages in the home directory as described in
+the previous section.
 
 ### Ubuntu and others
 
