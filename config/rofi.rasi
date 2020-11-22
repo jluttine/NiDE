@@ -3,8 +3,7 @@ configuration {
 	width: 70;
 /*	lines: 30;*/
 /*	columns: 1;*/
-	font: "Iosevka Nerd Font Mono 20";
-	/*font: "JetBrains Mono 20";*/
+	font: "JetBrainsMono Nerd Font Mono 20";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
@@ -36,7 +35,7 @@ terminal: "alacritty";
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
 /*	combi-modi: "window,run";*/
-/*	matching: "normal";*/
+	matching: "fuzzy";
 /*	tokenize: true;*/
 /*	m: "-5";*/
 /*	line-margin: 2;*/
@@ -54,7 +53,7 @@ terminal: "alacritty";
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-/*	theme: ;*/
+	theme: "Paper";
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/

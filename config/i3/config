@@ -51,7 +51,7 @@ exec --no-startup-id polybar -c ~/.nide/config/polybar/config nide
 bindsym $mod+Shift+BackSpace exec polybar-msg cmd toggle
 
 # Rofi
-bindsym $mod+space exec --no-startup-id rofi -show drun -matching fuzzy -show-icons -sidebar-mode
+bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons -sidebar-mode
 
 # Dunst
 exec --no-startup-id dunst -config ~/.nide/config/dunst/dunstrc
@@ -83,7 +83,7 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0; exec pac
 bindsym XF86AudioLowerVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0; exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 # Menu for log out, shut down, suspend etc
-bindsym Ctrl+Mod1+Delete exec --no-startup-id rofi -show power-menu -modi power-menu:rofi-power-menu -matching fuzzy -theme Paper -font "JetBrainsMono NF 20" -width 20 -lines 6
+bindsym Ctrl+Mod1+Delete exec --no-startup-id rofi -show power-menu -modi power-menu:rofi-power-menu -width 20 -lines 6
 
 # Lock screen
 bindsym Ctrl+Mod1+l exec --no-startup-id loginctl lock-session
