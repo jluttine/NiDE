@@ -149,6 +149,7 @@ in {
   ];
   config = {
     ...
+    services.xserver.desktopManager.nide.enable = true;
     nix.extraOptions = ''
       tarball-ttl = 0
     '';
