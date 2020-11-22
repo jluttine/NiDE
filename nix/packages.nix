@@ -90,6 +90,9 @@ in [
   rofi-script-to-dmenu
   rofi-power-menu
 
+  gnupg
+  pinentry-qt
+
   # Some extras
   zsh
   fzf
