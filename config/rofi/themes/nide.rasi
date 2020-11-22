@@ -1,0 +1,50 @@
+@import "gruvbox-dark"
+
+#listview {
+  scrollbar: false;
+  padding: 10;
+  fixed-columns: true;
+  fixed-height: 100;
+  columns: 6;
+  lines: 1;
+  dynamic: true; // this doesn't seem to do anything
+  spacing: 0;
+  horizontal-align: 0.5;
+}
+
+#textbox { horizontal-align: 0.5; }
+
+element-text {
+  horizontal-align: 0.5;
+  layout: vertical;
+  orientation: vertical;
+}
+
+element-icon {
+  horizontal-align: 0.5;
+  layout: vertical;
+  orientation: vertical;
+  size: 60;
+}
+
+element {
+  orientation: vertical;
+}
+
+element-box {
+  layout: vertical;
+  orientation: vertical;
+}
+
+#element {
+  //padding: 20;
+  text-align: center;
+  align-content: center;
+  padding-left: 50;
+  horizontal-align: 0.5;
+}
+
+#element.symbol {
+  text-color: rgba (255, 0, 0, 100 %);
+  text-align: center;
+}

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Wrap the locking command to a separate script here so we can update the
+# configuration below without needing to kill and restart xss-lock.
+
+export XSECURELOCK_PASSWORD_PROMPT=hidden
+export XSECURELOCK_AUTH_CURSOR_BLINK=0
+export XSECURELOCK_SHOW_DATETIME=1
+
+exec xsecurelock

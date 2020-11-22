@@ -1,0 +1,127 @@
+[bar/nide]
+background=${colors.background}
+border-size=0
+cursor-click=pointer
+cursor-scroll=ns-resize
+enable-ipc=true
+fixed-center=true
+font-0=JetBrains Mono:pixelsize=8;1
+font-1=unifont:fontformat=truetype:size=8:antialias=false;0
+font-2=Siji:pixelsize=10;0
+font-3=FuraCode Nerd Font:pixelsize=10;0
+foreground=${colors.foreground}
+height=27
+line-color=#f00
+line-size=3
+module-margin-left=1
+module-margin-right=2
+modules-center=date
+modules-left=i3 title
+modules-right=xkeyboard pulseaudio battery
+monitor=${env:MONITOR:}
+tray-padding=2
+tray-position=right
+width=100%
+
+[colors]
+alert=#bd2c40
+background=#222
+background-alt=#444
+foreground=#dfdfdf
+foreground-alt=#555
+primary=#ffb52a
+secondary=#e60053
+
+[module/battery]
+adapter=ADP1
+animation-charging-0=
+animation-charging-1=
+animation-charging-2=
+animation-charging-foreground=${colors.foreground-alt}
+animation-charging-framerate=750
+animation-discharging-0=
+animation-discharging-1=
+animation-discharging-2=
+animation-discharging-foreground=${colors.foreground-alt}
+animation-discharging-framerate=750
+battery=BAT0
+format-charging=<animation-charging> <label-charging>
+full-at=98
+ramp-capacity-0=
+ramp-capacity-1=
+ramp-capacity-2=
+ramp-capacity-foreground=${colors.foreground-alt}
+type=internal/battery
+
+[module/date]
+cnterval=5
+date=%a %b %e
+format-prefix-foreground=${colors.foreground-alt}
+label=%date% %time%
+time=%H:%M
+type=internal/date
+
+[module/i3]
+format=<label-state> <label-mode>
+index-sort=true
+label-focused=%index%
+label-focused-background=${colors.background-alt}
+label-focused-padding=2
+label-mode-background=${colors.primary}
+label-mode-foreground=#000
+label-mode-padding=2
+label-unfocused=%index%
+label-unfocused-padding=2
+label-urgent=%index%
+label-urgent-background=${colors.alert}
+label-urgent-padding=2
+label-visible=%index%
+label-visible-background=${self.label-focused-background}
+label-visible-padding=${self.label-focused-padding}
+type=internal/i3
+wrapping-scroll=false
+
+[module/kdeconnect]
+exec=/nix/store/clhc2xgxg1wl7zxkkqarwsxbiyv6vhx4-polybar-kdeconnect-unstable-2019-05-28/libexec/polybar-kdeconnect.sh -d
+tail=true
+type=custom/script
+
+[module/pulseaudio]
+bar-volume-empty=─
+bar-volume-empty-font=2
+bar-volume-empty-foreground=${colors.foreground-alt}
+bar-volume-fill=─
+bar-volume-fill-font=2
+bar-volume-foreground-0=#55aa55
+bar-volume-foreground-1=#55aa55
+bar-volume-foreground-2=#55aa55
+bar-volume-foreground-3=#55aa55
+bar-volume-foreground-4=#55aa55
+bar-volume-foreground-5=#f5a70a
+bar-volume-foreground-6=#ff5555
+bar-volume-gradient=false
+bar-volume-indicator=|
+bar-volume-indicator-font=2
+bar-volume-width=10
+format-volume=<label-volume> <bar-volume>
+label-muted=🔇 muted
+label-muted-foreground=#666
+label-volume=VOL %percentage%%
+label-volume-foreground=${root.foreground}
+type=internal/pulseaudio
+
+[module/title]
+label=%title%
+label-maxlen=50
+type=internal/xwindow
+
+[module/xkeyboard]
+blacklist-0=num lock
+label-indicator-background=${colors.secondary}
+label-indicator-margin=1
+label-indicator-padding=2
+label-layout=%layout%
+type=internal/xkeyboard
+
+[settings]
+screenchange-reload=true

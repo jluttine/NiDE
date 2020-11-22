@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -o allexport
+source "$HOME/.config/locale.conf"
+set +o allexport
+
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOM="$HOME/.cache"
+# Use NiDE config/data as default system config/data. This way NiDE takes
+# precedence over the system defaults but users can still override these with
+# files in the following user-specific directories:
+export XDG_CONFIG_DIRS="$HOME/.nide/config:$XDG_CONFIG_DIRS"
+export XDG_DATA_DIRS="$HOME/.nide/share:$HOME/.nide/result/share:$XDG_DATA_DIRS"
+export PATH="$HOME/.local/bin:$HOME/.nide/bin:$HOME/.nide/result/bin:$PATH"
+
+export XDG_CURRENT_DESKTOP=nide
+
+# TODO: Check what is the desktop standard for running various dotfiles like
+# .profile etc and add those here
+
+exec i3 -c "$HOME/.nide/config/i3/config"

@@ -1,0 +1,178 @@
+# Secret service D-Bus interface to Pass (Unix Password Manager)
+exec --no-startup-id pass_secret_service
+
+# Set these in i3 config so that these can be updated by just restarting i3.
+# NOTE: xsetroot is incompatible with picom so use hsetroot
+exec_always --no-startup-id hsetroot -solid black
+exec_always --no-startup-id setxkbmap fi,us -option caps:escape
+
+# Compositor that supports transparency. TODO: Use --config=...
+# It also has some D-Bus support, perhaps it can be used to reload config?
+# See: https://github.com/yshui/picom/issues/380
+#
+# NOTE: xsecurelock doesn't work with the default backend xrender
+# See: https://github.com/google/xsecurelock/issues/23#issuecomment-368164407
+#exec_always --no-startup-id picom
+#exec --no-startup-id picom --config ~/.config/nide/picom.conf
+exec --no-startup-id picom
+# Reload configuration of picom.
+# See: https://github.com/yshui/picom/issues/380#issuecomment-614501213
+#
+# However, if using glx backend, v7.5 or older won't work.
+# See: https://github.com/yshui/picom/issues/306
+exec_always --no-startup-id pkill -USR1 picom
+
+# Lockscreen preferences (note that only one xss-lock instance can run)
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset dpms 0 0 0
+exec_always --no-startup-id xset -dpms
+#TODO: Run once but make it configurable so that we can exec_always up-to-date configuration to it.
+#TODO: Put timers for screen suspending and turning off? Some canceller mechanism so that screen is turned off if already screen locked.
+exec --no-startup-id xidlehook --not-when-fullscreen --timer 300 "~/.nide/bin/nide-dim" "" --timer 5 "loginctl lock-session" ""
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.nide/bin/nide-lock
+
+# exec --no-startup-id gpg-connect-agent updatestartuptty /bye
+# exec --no-startup-id keychain
+# exec --no-startup-id eval $(ssh-agent)
+
+bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Home exec --no-startup-id xdg-open $HOME
+
+bindsym $mod+Escape kill
+bindsym $mod+Shift+Escape exec --no-startup-id kill-window TERM
+bindsym $mod+Shift+Ctrl+Escape exec --no-startup-id kill-window KILL
+
+bindsym $mod+Shift+space exec dbus-send --dest=ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.prev_layout
+
+exec_always --no-startup-id pasystray
+
+# Bar
+exec --no-startup-id polybar -c ~/.nide/config/polybar/config nide
+bindsym $mod+Shift+BackSpace exec polybar-msg cmd toggle
+
+# Rofi
+bindsym $mod+space exec --no-startup-id rofi -show drun -matching fuzzy -show-icons -sidebar-mode
+
+# Dunst
+exec --no-startup-id dunst -config ~/.nide/config/dunst/dunstrc
+
+# Udiskie daemon
+exec --no-startup-id udiskie --no-automount --tray
+
+# Kbdd dbus service
+
+# Auto-start applications
+exec --no-startup-id dex --autostart --environment nide
+
+# Autorandr?
+
+# Pass?
+
+# Network manager
+exec --no-startup-id nm-applet
+
+# KBDD
+exec --no-startup-id kbdd --nodaemon
+
+
+
+bindsym $mod+BackSpace border toggle
+
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0; exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0; exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Menu for log out, shut down, suspend etc
+bindsym Ctrl+Mod1+Delete exec --no-startup-id rofi -show power-menu -modi power-menu:rofi-power-menu -matching fuzzy -theme Paper -font "JetBrainsMono NF 20" -width 20 -lines 6
+
+# Lock screen
+bindsym Ctrl+Mod1+l exec --no-startup-id loginctl lock-session
+
+# Assign workspace names to variables
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $mod+1     workspace $ws1
+bindsym $mod+2     workspace $ws2
+bindsym $mod+3     workspace $ws3
+bindsym $mod+4     workspace $ws4
+bindsym $mod+5     workspace $ws5
+bindsym $mod+6     workspace $ws6
+bindsym $mod+7     workspace $ws7
+bindsym $mod+8     workspace $ws8
+bindsym $mod+9     workspace $ws9
+bindsym $mod+0     workspace $ws10
+bindsym $mod+Left  workspace prev
+bindsym $mod+Right workspace next
+
+# Move focused container to workspace
+bindsym $mod+Shift+1     move container to workspace $ws1;  workspace $ws1
+bindsym $mod+Shift+2     move container to workspace $ws2;  workspace $ws2
+bindsym $mod+Shift+3     move container to workspace $ws3;  workspace $ws3
+bindsym $mod+Shift+4     move container to workspace $ws4;  workspace $ws4
+bindsym $mod+Shift+5     move container to workspace $ws5;  workspace $ws5
+bindsym $mod+Shift+6     move container to workspace $ws6;  workspace $ws6
+bindsym $mod+Shift+7     move container to workspace $ws7;  workspace $ws7
+bindsym $mod+Shift+8     move container to workspace $ws8;  workspace $ws8
+bindsym $mod+Shift+9     move container to workspace $ws9;  workspace $ws9
+bindsym $mod+Shift+0     move container to workspace $ws10; workspace $ws10
+bindsym $mod+Shift+Left  move container to workspace prev;  workspace prev
+bindsym $mod+Shift+Right move container to workspace next;  workspace next
+
+# Move focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Resize focused window
+bindsym $mod+Ctrl+h resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+j resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+k resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+l resize grow width 10 px or 10 ppt
+
+# Focus the parent/child container
+bindsym $mod+a focus parent
+bindsym $mod+d focus child
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Split in horizontal/vertical orientation
+bindsym $mod+bar   split h
+bindsym $mod+minus split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Focus/toggle tiling/floating
+bindsym $mod+Tab       focus mode_toggle
+bindsym $mod+Shift+Tab floating toggle
+
+font pango:JetBrains Mono 8
+
+set $mod Mod4
+
+floating_modifier $mod
+
+hide_edge_borders smart
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart; exec polybar-msg cmd restart
