@@ -149,6 +149,9 @@ in {
   ];
   config = {
     ...
+    nix.extraOptions = ''
+      tarball-ttl = 0
+    '';
     environment.systemPackages = [
       ...
     ] ++ ((import "${nide}/nix/packages.nix") { inherit pkgs; });
@@ -156,8 +159,9 @@ in {
 }
 ```
 
-It's recommended to pin the tarball to a specific commit or tag and then set
-`sha256`:
+The nix extra option sets tarball cache to zero seconds, so the tarball isn't
+cached but always downloaded. However, it's recommended to pin the tarball to a
+specific commit or tag and then set `sha256`:
 
 ```
 nide = builtins.fetchTarball {
@@ -166,9 +170,9 @@ nide = builtins.fetchTarball {
 };
 ```
 
-However, that isn't done here because it's difficult to maintain in this README
-file. Of course, you can also use your local check-out of the repository and
-import from that path instead of GitHub.
+That isn't done here because it's difficult to maintain in this README file. Of
+course, you can also use your local check-out of the repository and import from
+that path instead of GitHub.
 
 Note that it is possible to only either import `configuration.nix` but not use
 `packages.nix` or vice versa depending on what you want. Personally, I import
