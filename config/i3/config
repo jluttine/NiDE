@@ -54,7 +54,7 @@ bindsym $mod+Shift+space exec --no-startup-id dbus-send --dest=ru.gentoo.KbddSer
 exec_always --no-startup-id pasystray
 
 # Bar
-exec --no-startup-id polybar -c ~/.nide/config/polybar/config nide
+exec --no-startup-id polybar --reload --config=/home/jluttine/.nide/config/polybar/config nide
 bindsym $mod+Shift+BackSpace exec polybar-msg cmd toggle
 
 # Rofi
