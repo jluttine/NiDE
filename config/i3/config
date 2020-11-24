@@ -49,7 +49,7 @@ bindsym $mod+Escape kill
 bindsym $mod+Shift+Escape exec --no-startup-id kill-window TERM
 bindsym $mod+Shift+Ctrl+Escape exec --no-startup-id kill-window KILL
 
-bindsym $mod+Shift+space exec dbus-send --dest=ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.prev_layout
+bindsym $mod+Shift+space exec --no-startup-id dbus-send --dest=ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.prev_layout
 
 exec_always --no-startup-id pasystray
 
