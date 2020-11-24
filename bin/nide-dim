@@ -5,11 +5,14 @@ export XSECURELOCK_DIM_ALPHA=1
 # XSECURELOCK_DIM_FPS
 # export XSECURELOCK_DIM_OVERRIDE_COMPOSITOR_DETECTION=1
 # XSECURELOCK_DIM_MAX_FILL_SIZE
-export XSECURELOCK_DIM_TIME_MS=10000
 
-# FIXME: Don't use store path, install in persistent location
-dimmer=/nix/store/h26i1awcidfmxc2nxlfihdvcpwxv3vgb-xsecurelock-1.7.0/libexec/xsecurelock/dimmer
-until_nonidle=/nix/store/h26i1awcidfmxc2nxlfihdvcpwxv3vgb-xsecurelock-1.7.0/libexec/xsecurelock/until_nonidle
+# NOTE: These values must be kept in sync with the values given to xidlehook in
+# i3 config. The timer value given to the locker must be less than the sum of
+# these two values (in seconds):
+export XSECURELOCK_DIM_TIME_MS=5000
+export XSECURELOCK_WAIT_TIME_MS=6000
+
+dimmer=~/.nide/result/libexec/xsecurelock/dimmer
+until_nonidle=~/.nide/result/libexec/xsecurelock/until_nonidle
 
 $until_nonidle $dimmer
-

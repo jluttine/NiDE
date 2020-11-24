@@ -28,7 +28,14 @@ exec_always --no-startup-id xset dpms 0 0 0
 exec_always --no-startup-id xset -dpms
 #TODO: Run once but make it configurable so that we can exec_always up-to-date configuration to it.
 #TODO: Put timers for screen suspending and turning off? Some canceller mechanism so that screen is turned off if already screen locked.
-exec --no-startup-id xidlehook --not-when-fullscreen --timer 300 "~/.nide/bin/nide-dim" "" --timer 5 "loginctl lock-session" ""
+#
+# NOTE: The socket directory must be created before running this!!!
+#
+# NOTE: The lock-session timer must be shorter than the sum of dim and wait time
+# for the dimmer in nide-dim, because xidlehook starts counting the timer
+# immediately after triggering the dimmer but you don't want the dimmer wait
+# time to end before starting the screenlock.
+exec --no-startup-id xidlehook --not-when-fullscreen --socket ~/.nide/sockets/xidlehook.sock --timer 300 "~/.nide/bin/nide-dim" "" --timer 10 "loginctl lock-session" ""
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.nide/bin/nide-lock
 
 # exec --no-startup-id gpg-connect-agent updatestartuptty /bye

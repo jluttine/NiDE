@@ -74,8 +74,9 @@ in [
   libnotify
   dex
   alacritty
-  xsecurelock
-  xidlehook
+  xidlehook # monitors idle time and sends screenlock requests
+  xss-lock # listens for screenlock requests
+  xsecurelock # screenlock
   picom
   hsetroot  # picom-supported replacement for xsetroot
   autorandr
