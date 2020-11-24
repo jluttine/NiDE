@@ -81,11 +81,6 @@ label-visible-padding=${self.label-focused-padding}
 type=internal/i3
 wrapping-scroll=false
 
-[module/kdeconnect]
-exec=/nix/store/clhc2xgxg1wl7zxkkqarwsxbiyv6vhx4-polybar-kdeconnect-unstable-2019-05-28/libexec/polybar-kdeconnect.sh -d
-tail=true
-type=custom/script
-
 [module/pulseaudio]
 bar-volume-empty=─
 bar-volume-empty-font=2
