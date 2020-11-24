@@ -87,6 +87,8 @@ in [
   luakit
   arandr
   kill-window
+  udiskie
+  networkmanagerapplet
 
   rofi-script-to-dmenu
   rofi-power-menu
