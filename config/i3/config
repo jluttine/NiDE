@@ -35,8 +35,8 @@ exec_always --no-startup-id xset -dpms
 # for the dimmer in nide-dim, because xidlehook starts counting the timer
 # immediately after triggering the dimmer but you don't want the dimmer wait
 # time to end before starting the screenlock.
-exec --no-startup-id xidlehook --not-when-fullscreen --socket ~/.nide/sockets/xidlehook.sock --timer 300 "~/.nide/bin/nide-dim" "" --timer 10 "loginctl lock-session" ""
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.nide/bin/nide-lock
+exec --no-startup-id nide-xidlehook
+exec --no-startup-id xss-lock --transfer-sleep-lock -- nide-lock
 
 # exec --no-startup-id gpg-connect-agent updatestartuptty /bye
 # exec --no-startup-id keychain

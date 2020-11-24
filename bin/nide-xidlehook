@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# We need to wrap Xidlehook startup inside a shell script so that we have access
+# to tilde (~) or $HOME which are not available in i3 config
+
+exec xidlehook \
+     --not-when-fullscreen \
+     --socket "$XDG_RUNTIME_DIR/xidlehook.sock" \
+     --timer 300 "$HOME/.nide/bin/nide-dim" "" \
+     --timer 10 "loginctl lock-session" ""
