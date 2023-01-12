@@ -20,7 +20,7 @@ exec --no-startup-id picom
 #
 # However, if using glx backend, v7.5 or older won't work.
 # See: https://github.com/yshui/picom/issues/306
-exec_always --no-startup-id pkill -USR1 picom
+#exec_always --no-startup-id pkill -USR1 picom
 
 # Lockscreen preferences (note that only one xss-lock instance can run)
 exec_always --no-startup-id xset s off
@@ -70,6 +70,8 @@ exec --no-startup-id udiskie --no-automount --tray
 
 # Auto-start applications
 exec --no-startup-id dex --autostart --environment nide
+
+exec --no-startup-id kdeconnect-indicator
 
 # Autorandr?
 

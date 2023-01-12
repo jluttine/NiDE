@@ -3,6 +3,28 @@
 with pkgs;
 
 let
+
+  polybar-kdeconnect = let
+    deps = lib.makeBinPath [ pkgs.qt5.qttools pkgs.coreutils pkgs.gawk pkgs.rofi
+                             pkgs.gnome.zenity plasma5Packages.kdeconnect-kde ];
+  in pkgs.stdenv.mkDerivation rec {
+    pname = "polybar-kdeconnect";
+    version = "unstable-2019-05-28";
+    src = pkgs.fetchFromGitHub {
+      owner = "HackeSta";
+      repo = pname;
+      rev = "f640a070654f4be0ea949ffd07c8bf1fcf1b6b50";
+      sha256 = "0sidj654gys9fdp5v6cmr2s9lmxaps2dacq46wcy666ykgdjyx29";
+    };
+    buildInputs = [ pkgs.makeWrapper ];
+    installPhase = ''
+      mkdir -p $out/libexec
+      mv polybar-kdeconnect.sh $out/libexec/
+      wrapProgram $out/libexec/polybar-kdeconnect.sh --prefix PATH : ${deps};
+    '';
+    doCheck = false;
+  };
+
   rofi-script-to-dmenu = stdenv.mkDerivation rec {
     pname = "rofi-script-to-dmenu";
     version = "1.1.0";
@@ -35,7 +57,7 @@ let
   };
 
   kill-window = let
-    xprop = "${xlibs.xprop}/bin/xprop";
+    xprop = "${xorg.xprop}/bin/xprop";
     awk = "${gawk}/bin/awk";
   in pkgs.writeScriptBin "kill-window" ''
     #!/bin/sh
@@ -68,7 +90,9 @@ in [
     # keyboard layout which is used when no window is focused.
     #
     # TODO: Add global (no window in focus) keyboard layout state.
-    patches = [ ./kbdd.patch ];
+    #patches = [ ./kbdd.patch ];
+    #
+    # This was possibly fixed by https://github.com/qnikst/kbdd/pull/53
   }))
   dunst
   libnotify
@@ -89,6 +113,8 @@ in [
   kill-window
   udiskie
   networkmanagerapplet
+
+  polybar-kdeconnect
 
   rofi-script-to-dmenu
   rofi-power-menu
