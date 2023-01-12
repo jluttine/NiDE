@@ -1,5 +1,5 @@
 configuration {
-	modi: "drun,run,ssh,file-browser,window";
+	modi: "drun,run,ssh,filebrowser,window";
 	width: 70;
 /*	lines: 30;*/
 /*	columns: 1;*/
@@ -53,7 +53,6 @@ terminal: "alacritty";
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-	theme: "Paper";
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -143,3 +142,4 @@ terminal: "alacritty";
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+@theme "Paper"
