@@ -7,7 +7,7 @@ set +o allexport
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOM="$HOME/.cache"
+export XDG_CACHE_HOME="$HOME/.cache"
 # Use NiDE config/data as default system config/data. This way NiDE takes
 # precedence over the system defaults but users can still override these with
 # files in the following user-specific directories:
