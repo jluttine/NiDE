@@ -4,6 +4,7 @@
 # to tilde (~) or $HOME which are not available in i3 config
 
 exec xidlehook \
+     --detect-sleep \
      --not-when-fullscreen \
      --socket "$XDG_RUNTIME_DIR/xidlehook.sock" \
      --timer 300 "$HOME/.nide/bin/nide-dim" "" \
