@@ -1,7 +1,10 @@
 #!/bin/sh
 
 set -o allexport
-source "$HOME/.config/locale.conf"
+if [ -e "$HOME/.config/locale.conf" ]
+then
+	source "$HOME/.config/locale.conf"
+fi
 set +o allexport
 
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -19,5 +22,7 @@ export XDG_CURRENT_DESKTOP=nide
 
 # TODO: Check what is the desktop standard for running various dotfiles like
 # .profile etc and add those here
+
+xrdb -merge "$HOME/.Xresources"
 
 exec i3 -c "$HOME/.nide/config/i3/config"
