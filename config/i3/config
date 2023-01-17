@@ -175,13 +175,17 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Tab       focus mode_toggle
 bindsym $mod+Shift+Tab floating toggle
 
-font pango:JetBrains Mono 10
+font pango:JetBrains Mono 9
 
 set $mod Mod4
 
 floating_modifier $mod
 
 hide_edge_borders smart
+
+# Enable window icons for all windows
+#for_window [all] title_window_icon on
+for_window [all] title_window_icon padding 4px
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart; exec polybar-msg cmd restart
