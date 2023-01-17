@@ -38,7 +38,7 @@ in {
       enable = true;
       bindings = let
         light = "${pkgs.light}/bin/light";
-        step = "10";
+        step = "5";
       in [
         {
           keys = [ 224 ];
