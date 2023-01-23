@@ -5,10 +5,9 @@ cursor-click=pointer
 cursor-scroll=ns-resize
 enable-ipc=true
 fixed-center=true
-font-0=JetBrains Mono:size=12
-font-1=unifont:fontformat=truetype:size=8:antialias=false;0
-font-2=Siji:size=10;0
-font-3=FuraCode Nerd Font:size=10;0
+font-0=JetBrainsMono Nerd Font Mono:size=12
+;; NOTE: You need Nerdfonts >=2.3.0 for Symbols to contain all the used icons
+font-1="Symbols Nerd Font Mono:size=16"
 foreground=${colors.foreground}
 height=28pt
 line-color=#f00
