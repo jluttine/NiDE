@@ -118,7 +118,7 @@ blacklist-0=num lock
 label-indicator-background=${colors.secondary}
 label-indicator-margin=1
 label-indicator-padding=2
-label-layout=%layout%
+label-layout=%layout% %{T2}
 type=internal/xkeyboard
 
 [settings]
