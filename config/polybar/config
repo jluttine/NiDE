@@ -33,25 +33,41 @@ primary=#ffb52a
 secondary=#e60053
 
 [module/battery]
-adapter=ADP1
-animation-charging-0=
-animation-charging-1=
-animation-charging-2=
-animation-charging-foreground=${colors.foreground-alt}
-animation-charging-framerate=750
-animation-discharging-0=
-animation-discharging-1=
-animation-discharging-2=
-animation-discharging-foreground=${colors.foreground-alt}
-animation-discharging-framerate=750
-battery=BAT0
-format-charging=<animation-charging> <label-charging>
-full-at=98
-ramp-capacity-0=
-ramp-capacity-1=
-ramp-capacity-2=
-ramp-capacity-foreground=${colors.foreground-alt}
 type=internal/battery
+adapter=ADP1
+battery=BAT0
+ramp-capacity-0="%{T2}"
+ramp-capacity-1="%{T2}"
+ramp-capacity-2="%{T2}"
+ramp-capacity-3="%{T2}"
+ramp-capacity-4="%{T2}"
+ramp-capacity-5="%{T2}"
+ramp-capacity-6="%{T2}"
+ramp-capacity-7="%{T2}"
+ramp-capacity-8="%{T2}"
+ramp-capacity-9="%{T2}"
+ramp-capacity-10="%{T2}"
+format-charging="<label-charging> <ramp-capacity>%{T2}󱐋"
+label-charging="%{T-}%percentage:3%%"
+full-at=102
+;; Is it possible to detect when running on AC power, not charging? Now,
+;; format-full is used when the battery charge is 100% regardless of whether
+;; it's discharging, charging or full. Or maybe if full-at>100, then the full
+;; state gets enabled only when the battery reports it's full and it doesn't
+;; charge anymore, so in that case we could deduce it's running on AC power?
+format-full="<label-full> <ramp-capacity>%{T2}ﮣ"
+label-full=${self.label-charging}
+;; Need to use an invisible symbol at the end because Symbola has no space
+;; character and we want to keep the labels equally wide in all modes
+;; (discharge/charge/low/full)
+format-discharging="<label-discharging> <ramp-capacity>%{F#00}󱐋"
+label-discharging=${self.label-charging}
+low-at=10
+format-low="<label-low> %{F#F00}<ramp-capacity><animation-low>"
+label-low=${self.label-charging}
+animation-low-0="%{T2}"
+animation-low-1="%{T2}%{F#00}"
+animation-low-framerate=500
 
 [module/date]
 cnterval=5
