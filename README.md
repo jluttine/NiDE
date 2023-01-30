@@ -221,6 +221,11 @@ Also, `Caps Lock` key is used as `Esc`.
 - Add icons
 - Customize rofi-file-browser appearance after
   https://github.com/marvinkreis/rofi-file-browser-extended/issues/24
+- Overlay notifications for brightness and volume:
+  - https://www.reddit.com/r/unixporn/comments/9i5seg/brightness_and_volume_notifications_with_dunst_oc/
+  - https://askubuntu.com/questions/670602/event-handler-even-more-low-level-than-acpid
+  - https://stackoverflow.com/questions/34936783/watch-for-volume-changes-in-alsa-pulseaudio#comment119780742_57722672
+  - https://wiki.archlinux.org/title/Dunst#Using_dunstify_as_volume/brightness_level_indicator
 
 ## Contributions
 
