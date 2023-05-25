@@ -8,6 +8,7 @@ fixed-center=true
 font-0=JetBrainsMono Nerd Font Mono:size=12
 ;; NOTE: You need Nerdfonts >=2.3.0 for Symbols to contain all the used icons
 font-1="Symbols Nerd Font Mono:size=16"
+font-2="Symbols Nerd Font Mono:size=12"
 foreground=${colors.foreground}
 height=28pt
 line-color=#f00
@@ -36,17 +37,17 @@ secondary=#e60053
 type=internal/battery
 adapter=ADP1
 battery=BAT0
-ramp-capacity-0="%{T2}"
-ramp-capacity-1="%{T2}"
-ramp-capacity-2="%{T2}"
-ramp-capacity-3="%{T2}"
-ramp-capacity-4="%{T2}"
-ramp-capacity-5="%{T2}"
-ramp-capacity-6="%{T2}"
-ramp-capacity-7="%{T2}"
-ramp-capacity-8="%{T2}"
-ramp-capacity-9="%{T2}"
-ramp-capacity-10="%{T2}"
+ramp-capacity-0="%{T2}󰂎"
+ramp-capacity-1="%{T2}󰁺"
+ramp-capacity-2="%{T2}󰁻"
+ramp-capacity-3="%{T2}󰁼"
+ramp-capacity-4="%{T2}󰁽"
+ramp-capacity-5="%{T2}󰁾"
+ramp-capacity-6="%{T2}󰁿"
+ramp-capacity-7="%{T2}󰂀"
+ramp-capacity-8="%{T2}󰂁"
+ramp-capacity-9="%{T2}󰂂"
+ramp-capacity-10="%{T2}󰁹"
 format-charging="<label-charging> <ramp-capacity>%{T2}󱐋"
 label-charging="%{T-}%percentage:3%%"
 full-at=102
@@ -55,7 +56,8 @@ full-at=102
 ;; it's discharging, charging or full. Or maybe if full-at>100, then the full
 ;; state gets enabled only when the battery reports it's full and it doesn't
 ;; charge anymore, so in that case we could deduce it's running on AC power?
-format-full="<label-full> <ramp-capacity>%{T2}ﮣ"
+;;format-full="<label-full> <ramp-capacity>%{O-4pt}%{T3}󱐋"
+format-full="<label-full> <ramp-capacity>%{O-4pt}%{T3}ﮣ"
 label-full=${self.label-charging}
 ;; Need to use an invisible symbol at the end because Symbola has no space
 ;; character and we want to keep the labels equally wide in all modes
@@ -101,9 +103,9 @@ wrapping-scroll=false
 type=internal/pulseaudio
 format-volume="<label-volume> <ramp-volume>"
 label-volume="%{T1}%percentage:3%%%{T-}"
-ramp-volume-0="%{T2}奄"
-ramp-volume-1="%{T2}奔"
-ramp-volume-2="%{T2}墳"
+ramp-volume-0="%{T2}󰕿"
+ramp-volume-1="%{T2}󰖀"
+ramp-volume-2="%{T2}󰕾"
 label-muted="---%%{T2} ﱝ"
 label-muted-foreground=#666
 click-right = pavucontrol
