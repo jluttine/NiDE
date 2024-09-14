@@ -22,7 +22,7 @@ in {
     services.xserver.desktopManager.xterm.enable = true;
 
     # Set fonts
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       noto-fonts
       (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
     ];
