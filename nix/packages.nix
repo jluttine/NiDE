@@ -6,7 +6,7 @@ let
 
   polybar-kdeconnect = let
     deps = lib.makeBinPath [ pkgs.qt5.qttools pkgs.coreutils pkgs.gawk pkgs.rofi
-                             pkgs.gnome.zenity plasma5Packages.kdeconnect-kde ];
+                             pkgs.zenity plasma5Packages.kdeconnect-kde ];
   in pkgs.stdenv.mkDerivation rec {
     pname = "polybar-kdeconnect";
     version = "unstable-2019-05-28";
