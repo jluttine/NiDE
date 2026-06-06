@@ -34,23 +34,24 @@ in {
     };
 
     # Keybindings for adjusting monitor brightness. Adjusting brightness with
-    # actkbd+light is nice because it's independent of X and works in ttys.
+    # actkbd+brightnessctl is nice because it's independent of X and works in
+    # ttys.
     services.actkbd = {
       enable = true;
       bindings = let
-        light = "${pkgs.light}/bin/light";
+        light = "${pkgs.brightnessctl}/bin/brightnessctl";
         step = "5";
       in [
         {
           keys = [ 224 ];
           events = [ "key" ];
           # Use minimum brightness 0.1 so the display won't go totally black.
-          command = "${light} -N 0.1 && ${light} -U ${step}";
+          command = "${light} --min-value 1 set ${step}%-";
         }
         {
           keys = [ 225 ];
           events = [ "key" ];
-          command = "${light} -A ${step}";
+          command = "${light} set +${step}%";
         }
       ];
     };
