@@ -59,7 +59,6 @@ in {
     # Enable users to modify brightness. NOTE: User must belong to video group!
     # (These modify udev rules, so if you just enabled this, probably best to
     # reboot.)
-    programs.light.enable = true;
     hardware.acpilight.enable = true;
 
     # Installing the NiDE dependencies is optional as they can be installed also
