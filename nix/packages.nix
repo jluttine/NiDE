@@ -1,12 +1,9 @@
-{ pkgs ? import <nixpkgs> { } }:
-
-with pkgs;
-
+{ pkgs ? import <nixpkgs> { } }: with pkgs;
 let
 
   polybar-kdeconnect = let
-    deps = lib.makeBinPath [ pkgs.qt5.qttools pkgs.coreutils pkgs.gawk pkgs.rofi
-                             pkgs.zenity plasma5Packages.kdeconnect-kde ];
+    deps = lib.makeBinPath [ pkgs.qt6.qttools pkgs.coreutils pkgs.gawk pkgs.rofi
+                             pkgs.zenity kdePackages.kdeconnect-kde ];
   in pkgs.stdenv.mkDerivation rec {
     pname = "polybar-kdeconnect";
     version = "unstable-2019-05-28";
@@ -57,13 +54,13 @@ let
   };
 
   kill-window = let
-    xprop = "${xorg.xprop}/bin/xprop";
+    xp = "${xprop}/bin/xprop";
     awk = "${gawk}/bin/awk";
   in pkgs.writeScriptBin "kill-window" ''
     #!/bin/sh
     set -x
-    window_ID=$(${xprop} -root | ${awk} '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
-    window_PID=$(${xprop} -id $window_ID | ${awk} '/_NET_WM_PID\(CARDINAL\)/{print $NF}')
+    window_ID=$(${xp} -root | ${awk} '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+    window_PID=$(${xp} -id $window_ID | ${awk} '/_NET_WM_PID\(CARDINAL\)/{print $NF}')
     kill -$1 $window_PID
   '';
 

@@ -46,7 +46,7 @@ in {
           keys = [ 224 ];
           events = [ "key" ];
           # Use minimum brightness 0.1 so the display won't go totally black.
-          command = "${light} --min-value 1 set ${step}%-";
+          command = "${light} --min-value=1 set ${step}%-";
         }
         {
           keys = [ 225 ];
